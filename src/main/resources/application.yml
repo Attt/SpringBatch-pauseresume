@@ -1,0 +1,25 @@
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/test
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test
+    username: root
+    password: root
+  batch:
+    initializer:
+      enabled: true
+    job:
+      enabled: false
+server:
+  address: 127.0.0.1
+  port: 8090
+  session:
+    timeout: 30
+  servlet:
+    context-path: /
+mybatis:
+  mapper-locations: classpath*:templates/sqlMapper/*Mapper.xml
+

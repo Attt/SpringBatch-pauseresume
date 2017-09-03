@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atpex.mapper.UserRoleMapper">
+  <resultMap id="BaseResultMap" type="com.atpex.model.UserRole">
+    <result column="uid" jdbcType="BIGINT" property="uid" />
+    <result column="rid" jdbcType="BIGINT" property="rid" />
+  </resultMap>
+  <select id="selectByUser" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select * from u_user_role where uid = #{uid,jdbcType=BIGINT}
+  </select>
+  <insert id="insert" parameterType="com.atpex.model.UserRole">
+    insert into u_user_role (uid, rid)
+    values (#{uid,jdbcType=BIGINT}, #{rid,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.atpex.model.UserRole">
+    insert into u_user_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="rid != null">
+        rid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="rid != null">
+        #{rid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="shutJob" parameterType="java.lang.Long">
+    UPDATE atpex_JOB_EXECUTION set END_TIME = NOW() , STATUS = 'COMPLETED', EXIT_CODE = 'COMPLETED', EXIT_MESSAGE = 'SYSTEM_SHUTDOWN', VERSION = 2,  LAST_UPDATED = NOW() where JOB_EXECUTION_ID = #{jobExecutionid,jdbcType=BIGINT}
+  </update>
+
+  <update id="shutStep" parameterType="java.lang.Long">
+    UPDATE atpex_STEP_EXECUTION set  END_TIME = NOW(), STATUS = 'COMPLETED', EXIT_CODE = 'COMPLETED',
+			EXIT_MESSAGE = 'SYSTEM_SHUTDOWN', LAST_UPDATED = NOW()
+			 where JOB_EXECUTION_ID = #{jobExecutionid,jdbcType=BIGINT} AND  EXIT_CODE= 'EXECUTING'
+  </update>
+</mapper>

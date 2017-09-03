@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atpex.mapper.RolePermissionMapper">
+  <resultMap id="BaseResultMap" type="com.atpex.model.RolePermission">
+    <result column="rid" jdbcType="BIGINT" property="rid" />
+    <result column="pid" jdbcType="BIGINT" property="pid" />
+  </resultMap>
+  <select id="selectByRole" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select * from u_role_permission where rid = #{rid,jdbcType=BIGINT}
+  </select>
+  <insert id="insert" parameterType="com.atpex.model.RolePermission">
+    insert into u_role_permission (rid, pid)
+    values (#{rid,jdbcType=BIGINT}, #{pid,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.atpex.model.RolePermission">
+    insert into u_role_permission
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rid != null">
+        rid,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rid != null">
+        #{rid,jdbcType=BIGINT},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

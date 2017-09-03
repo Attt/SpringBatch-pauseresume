@@ -38,6 +38,6 @@
   <update id="shutStep" parameterType="java.lang.Long">
     UPDATE atpex_STEP_EXECUTION set  END_TIME = NOW(), STATUS = 'COMPLETED', EXIT_CODE = 'COMPLETED',
 			EXIT_MESSAGE = 'SYSTEM_SHUTDOWN', LAST_UPDATED = NOW()
-			 where JOB_EXECUTION_ID = #{jobExecutionid,jdbcType=BIGINT} AND  EXIT_CODE= 'EXECUTING'
+			 where JOB_EXECUTION_ID = #{jobExecutionid,jdbcType=BIGINT}
   </update>
 </mapper>

@@ -87,7 +87,7 @@ public class StartApplication implements ApplicationContextAware {
         SpringApplication.run(StartApplication.class, args);
     }
 
-    @Scheduled(fixedRate = 60 * 1000, initialDelay = 20 * 60 * 1000)
+    @Scheduled(fixedRate = 60 * 1000, initialDelay = 60 * 1000)
     public void shutdown() {
         System.exit(0);
     }
